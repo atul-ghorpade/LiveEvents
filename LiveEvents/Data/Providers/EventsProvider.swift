@@ -1,5 +1,5 @@
 import Foundation
-import Moya
+import Moya //TODO: remove
 
 final class EventsProvider: EventsProviderProtocol {
     private let provider: Provider<EventsService>
@@ -20,13 +20,13 @@ final class EventsProvider: EventsProviderProtocol {
             switch result {
             case let .success(response):
                 do {
-                    let eventsListEntities = try response.map([EventEntity].self)
+                    let eventsListEntities = try response.map([EventEntity].self, atKeyPath: "events")
                     let eventsListModels = try eventsListEntities.map {
                         try $0.toDomain()
                     }
-                    print("Number of events received from service API - \(eventsListModels.count)")
                     completion(.success(eventsListModels))
                 } catch {
+                    print(error)
                     completion(.failure(.mapping(error)))
                 }
             case let .failure(error):

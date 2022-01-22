@@ -1,6 +1,6 @@
 import UIKit
 
-final class EventsRouter: EventDetailsRouterProtocol {
+final class EventsRouter {
     private weak var navigationController: UINavigationController?
     private weak var eventsListViewController: UIViewController?
 
@@ -21,12 +21,8 @@ protocol EventsListRouterProtocol: AnyObject {
     func showEventDetails(model: EventModel)
 }
 
-//protocol EventsListRouterProtocol: AnyObject {
-//    func showEventDetails(model: EventModel)
-//}
-
 protocol EventDetailsRouterProtocol: AnyObject {
-//    func showMapNavigation(name: String, locationModel: LocationModel)
+    func goBack()
 }
 
 extension EventsRouter: EventsListRouterProtocol {
@@ -39,3 +35,10 @@ extension EventsRouter: EventsListRouterProtocol {
                                                  animated: true)
     }
 }
+
+extension EventsRouter: EventDetailsRouterProtocol {
+    func goBack() {
+        navigationController?.popViewController(animated: true)
+    }
+}
+

@@ -1,6 +1,7 @@
 import Foundation
 
 protocol EventDetailsPresenterProtocol: PresenterProtocol {
+    func backButtonPressed()
 }
 
 enum EventDetailsViewState: Equatable {
@@ -9,8 +10,9 @@ enum EventDetailsViewState: Equatable {
 
     struct ViewModel: Equatable {
         let name: String
+        let imageURL: URL?
+        let dateString: String
         let address: String
-        let status: String
     }
 }
 
@@ -39,12 +41,27 @@ final class EventDetailsPresenter: EventDetailsPresenterProtocol {
     func viewLoaded() {
         calculateViewState()
     }
+    
+    func backButtonPressed() {
+        router.goBack()
+    }
 
     private func calculateViewState() {
-        let viewModel = EventDetailsViewState.ViewModel(name: "eventModel.",
-                                                             address: "Not Available",
-                                                             status: "Not Available")
+        let viewModel = EventDetailsViewState.ViewModel(name: eventModel.title,
+                                                        imageURL: eventModel.imageURL,
+                                                        dateString: getDisplayDateString(date: eventModel.date) ?? "N/A",
+                                                        address: eventModel.location ?? "N/A")
         viewState = .render(viewModel: viewModel)
+    }
+    
+    private func getDisplayDateString(date: Date?) -> String? {
+        var completeDateString: String?
+        if let date = eventModel.date,
+           let weekday = date.toString(style: .weekday),
+           let dateDisplayString = date.toString(format: .custom("d MMM yyyy h:mm a")) {
+            completeDateString = weekday + ", " + dateDisplayString
+        }
+        return completeDateString
     }
 }
 

@@ -11,7 +11,6 @@
 		B7890AF627999E4F00EF3BD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7890AF527999E4F00EF3BD6 /* SceneDelegate.swift */; };
 		B7890AF827999E4F00EF3BD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7890AF727999E4F00EF3BD6 /* ViewController.swift */; };
 		B7890AFB27999E4F00EF3BD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7890AF927999E4F00EF3BD6 /* Main.storyboard */; };
-		B7890AFD27999E5400EF3BD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7890AFC27999E5400EF3BD6 /* Assets.xcassets */; };
 		B7890B0027999E5400EF3BD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7890AFE27999E5400EF3BD6 /* LaunchScreen.storyboard */; };
 		B7890B0B27999E5400EF3BD6 /* LiveEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7890B0A27999E5400EF3BD6 /* LiveEventsTests.swift */; };
 		B7890B1527999E5400EF3BD6 /* LiveEventsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7890B1427999E5400EF3BD6 /* LiveEventsUITests.swift */; };
@@ -40,6 +39,9 @@
 		B7890B60279AE76F00EF3BD6 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7890B5F279AE76F00EF3BD6 /* EventDetailsViewController.swift */; };
 		B7890B62279AE77F00EF3BD6 /* EventDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7890B61279AE77F00EF3BD6 /* EventDetailsPresenter.swift */; };
 		B7890B64279AE78F00EF3BD6 /* EventDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7890B63279AE78F00EF3BD6 /* EventDetails.storyboard */; };
+		B7890B67279C375400EF3BD6 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = B7890B66279C375400EF3BD6 /* SDWebImage */; };
+		B7890B6A279C387E00EF3BD6 /* DateHelper in Frameworks */ = {isa = PBXBuildFile; productRef = B7890B69279C387E00EF3BD6 /* DateHelper */; };
+		B7890B6C279C502B00EF3BD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7890B6B279C502B00EF3BD6 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +67,6 @@
 		B7890AF527999E4F00EF3BD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B7890AF727999E4F00EF3BD6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B7890AFA27999E4F00EF3BD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B7890AFC27999E5400EF3BD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7890AFF27999E5400EF3BD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B7890B0127999E5400EF3BD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7890B0627999E5400EF3BD6 /* LiveEventsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiveEventsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +97,7 @@
 		B7890B5F279AE76F00EF3BD6 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		B7890B61279AE77F00EF3BD6 /* EventDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsPresenter.swift; sourceTree = "<group>"; };
 		B7890B63279AE78F00EF3BD6 /* EventDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EventDetails.storyboard; sourceTree = "<group>"; };
+		B7890B6B279C502B00EF3BD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7890B6A279C387E00EF3BD6 /* DateHelper in Frameworks */,
+				B7890B67279C375400EF3BD6 /* SDWebImage in Frameworks */,
 				B7890B5B2799B6F900EF3BD6 /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,7 +159,7 @@
 				B7890AF527999E4F00EF3BD6 /* SceneDelegate.swift */,
 				B7890AF727999E4F00EF3BD6 /* ViewController.swift */,
 				B7890AF927999E4F00EF3BD6 /* Main.storyboard */,
-				B7890AFC27999E5400EF3BD6 /* Assets.xcassets */,
+				B7890B6B279C502B00EF3BD6 /* Assets.xcassets */,
 				B7890AFE27999E5400EF3BD6 /* LaunchScreen.storyboard */,
 				B7890B0127999E5400EF3BD6 /* Info.plist */,
 			);
@@ -344,6 +348,8 @@
 			name = LiveEvents;
 			packageProductDependencies = (
 				B7890B5A2799B6F900EF3BD6 /* Moya */,
+				B7890B66279C375400EF3BD6 /* SDWebImage */,
+				B7890B69279C387E00EF3BD6 /* DateHelper */,
 			);
 			productName = LiveEvents;
 			productReference = B7890AF027999E4F00EF3BD6 /* LiveEvents.app */;
@@ -419,6 +425,8 @@
 			mainGroup = B7890AE727999E4F00EF3BD6;
 			packageReferences = (
 				B7890B592799B6F900EF3BD6 /* XCRemoteSwiftPackageReference "Moya" */,
+				B7890B65279C375400EF3BD6 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				B7890B68279C387D00EF3BD6 /* XCRemoteSwiftPackageReference "DateHelper" */,
 			);
 			productRefGroup = B7890AF127999E4F00EF3BD6 /* Products */;
 			projectDirPath = "";
@@ -439,8 +447,8 @@
 				B7890B64279AE78F00EF3BD6 /* EventDetails.storyboard in Resources */,
 				B7890B3B27999FF000EF3BD6 /* EventTableViewCell.xib in Resources */,
 				B7890B0027999E5400EF3BD6 /* LaunchScreen.storyboard in Resources */,
-				B7890AFD27999E5400EF3BD6 /* Assets.xcassets in Resources */,
 				B7890AFB27999E4F00EF3BD6 /* Main.storyboard in Resources */,
+				B7890B6C279C502B00EF3BD6 /* Assets.xcassets in Resources */,
 				B7890B412799A02A00EF3BD6 /* EventsList.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -864,6 +872,22 @@
 				kind = branch;
 			};
 		};
+		B7890B65279C375400EF3BD6 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		B7890B68279C387D00EF3BD6 /* XCRemoteSwiftPackageReference "DateHelper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/melvitax/DateHelper";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -871,6 +895,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B7890B592799B6F900EF3BD6 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		B7890B66279C375400EF3BD6 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B7890B65279C375400EF3BD6 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		B7890B69279C387E00EF3BD6 /* DateHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B7890B68279C387D00EF3BD6 /* XCRemoteSwiftPackageReference "DateHelper" */;
+			productName = DateHelper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

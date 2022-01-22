@@ -1,18 +1,21 @@
 //
 
 import UIKit
+import SDWebImage
 
 struct EventCellViewModel: CellViewModel, Equatable {
     let imageURL: URL?
     let name: String
-    let status: String?
+    let location: String?
+    let dateString: String?
 }
 
 final class EventTableViewCell: UITableViewCell {
     @IBOutlet private weak var eventImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var statusLabel: UILabel!
-
+    @IBOutlet private weak var locationLabel: UILabel!
+    @IBOutlet private weak var dateLabel: UILabel!
+    
     static let identifier = String(describing: EventTableViewCell.self)
 
     override func didMoveToSuperview() {
@@ -23,33 +26,10 @@ final class EventTableViewCell: UITableViewCell {
     func setup(viewModel: EventCellViewModel) {
         eventImageView.image = nil
         if let url = viewModel.imageURL {
-            eventImageView.downloadAndShowImage(url: url)
+            eventImageView.sd_setImage(with: url)
         }
         nameLabel.text = viewModel.name
-        if let statusString = viewModel.status {
-            statusLabel.isHidden = false
-            statusLabel.text = statusString
-        } else {
-            statusLabel.isHidden = true
-        }
-    }
-}
-
-//TODO: This code should not be here inside a view as it contains logic to download from remote URL, added temporarily, remove it! Also support logic to cancel download once cell is reused for other rows
-extension UIImageView {
-    fileprivate func downloadAndShowImage(url: URL) {
-        let urlRequest = URLRequest(url: url)
-        URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
-            guard error == nil, let data = data else {
-                return
-            }
-            DispatchQueue.main.async {
-                self.image = nil
-            }
-            let image = UIImage(data: data)
-            DispatchQueue.main.async { [weak self] in
-                self?.image = image
-            }
-        }.resume()
+        locationLabel.text = viewModel.location
+        dateLabel.text = viewModel.dateString
     }
 }

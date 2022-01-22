@@ -57,9 +57,15 @@ final class EventsListPresenter: EventsListPresenterProtocol {
                 return
             }
             switch result {
-            case .success(let receivedEventsModel): break
+            case .success(let receivedEvents):
+                self.eventModels = receivedEvents
+                let rowViewModels = (self.eventModels ?? []).map {
+                    self.getCellViewModel(eventModel: $0)
+                }
+                let viewModel = EventsListViewState.ViewModel(rowsViewModels: rowViewModels)
+                self.viewState = .render(viewModel: viewModel)
             case .failure(let useCaseError): break
-        }
+            }
         }
         getEventsUseCase.run(params)
     }
@@ -80,17 +86,24 @@ final class EventsListPresenter: EventsListPresenterProtocol {
     }
 
     private func getCellViewModel(eventModel: EventModel) -> EventCellViewModel {
-        var statusString: String?
-//        if let status = eventModel.openStatus {
-//            statusString = status ? "Open" : "Closed"
-//        }
         return EventCellViewModel(imageURL: eventModel.imageURL,
-                                  name: "name",
-                                  status: statusString)
+                                  name: eventModel.title,
+                                  location: eventModel.location,
+                                  dateString: getDisplayDateString(date: eventModel.date))
     }
 
     private func isAllModelsDisplayed() -> Bool {
         return true
+    }
+    
+    private func getDisplayDateString(date: Date?) -> String? {
+        var completeDateString: String?
+        if let date = date,
+           let weekday = date.toString(style: .weekday),
+           let dateDisplayString = date.toString(format: .custom("d MMM yyyy h:mm a")) {
+            completeDateString = weekday + ", " + dateDisplayString
+        }
+        return completeDateString
     }
 }
 

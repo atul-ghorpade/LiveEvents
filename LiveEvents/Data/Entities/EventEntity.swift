@@ -1,9 +1,10 @@
 //
 
+import DateHelper
 import Foundation
 
 struct EventEntity: Decodable {
-    let identifier: String
+    let identifier: Int
     let title: String?
     let performers: [PerformerEntity]?
     let venue: VenueEntity?
@@ -23,8 +24,7 @@ struct EventEntity: Decodable {
                                               debugDescription: "nil title")
             throw EncodingError.invalidValue(self, error)
         }
-
-        let imageURL = URL(string: performers?.first?.imageURL ?? "") 
+        let imageURL = URL(string: performers?.first?.imageURL ?? "")
         let location = venue?.displayLocation
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"

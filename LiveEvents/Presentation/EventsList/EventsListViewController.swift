@@ -21,6 +21,11 @@ final class EventsListViewController: UIViewController, EventsListView {
         setupViews()
         presenter.viewLoaded()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
 
     private func setupViews() {
         tableView.register(UINib(nibName: String(describing: EventTableViewCell.self),

@@ -8,7 +8,7 @@
 import Foundation
 
 struct EventModel: Equatable {
-    let identifier: String
+    let identifier: Int
     let title: String
     let imageURL: URL?
     let location: String?
