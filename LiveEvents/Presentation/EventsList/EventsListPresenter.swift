@@ -5,6 +5,7 @@ import Foundation
 protocol EventsListPresenterProtocol: PresenterProtocol, TableViewDataSource {
     func didScrollBeyondCurrentPage()
     func didSelectRow(indexPath: IndexPath)
+    func didChangeSearchText(_ text: String)
 }
 
 enum EventsListViewState: Equatable {
@@ -21,9 +22,10 @@ protocol EventsListPresenterDelegate: AnyObject {
     func handleNextPageRequest()
 }
 
-final class EventsListPresenter: EventsListPresenterProtocol {
+final class EventsListPresenter: NSObject, EventsListPresenterProtocol {
 
     private weak var view: EventsListView?
+    private var currentEnteredText: String?
 
     private weak var router: EventsListRouterProtocol!
     private var eventModels: [EventModel]?
@@ -50,9 +52,9 @@ final class EventsListPresenter: EventsListPresenterProtocol {
         getEvents()
     }
 
-    private func getEvents() {
+    private func getEvents(searchText: String? = nil) {
         viewState = .loading
-        let params = GetEventsParams() { [weak self] result in
+        let params = GetEventsParams(query: searchText) { [weak self] result in
             guard let self = self else {
                 return
             }
@@ -67,7 +69,9 @@ final class EventsListPresenter: EventsListPresenterProtocol {
             case .failure(let useCaseError): break
             }
         }
-        getEventsUseCase.run(params)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.getEventsUseCase.run(params)
+        }
     }
 
     func didSelectRow(indexPath: IndexPath) {
@@ -85,6 +89,20 @@ final class EventsListPresenter: EventsListPresenterProtocol {
         viewState = .loading
     }
 
+    func didChangeSearchText(_ text: String) {
+        currentEnteredText = text
+        NSObject.cancelPreviousPerformRequests(withTarget: self,
+                                               selector: #selector(EventsListPresenter.searchChangedText),
+                                               object: nil)
+        self.perform(#selector(Self.searchChangedText),
+                     with: nil,
+                     afterDelay: 0.5)
+    }
+    
+    @objc private func searchChangedText() {
+        getEvents(searchText: currentEnteredText)
+    }
+    
     private func getCellViewModel(eventModel: EventModel) -> EventCellViewModel {
         return EventCellViewModel(imageURL: eventModel.imageURL,
                                   name: eventModel.title,

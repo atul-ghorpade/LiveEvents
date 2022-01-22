@@ -16,21 +16,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u6t-B7-vjw">
+                                <rect key="frame" x="0.0" y="44" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="b3Z-vt-qoV"/>
+                                </connections>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="52v-TQ-7UF">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="105" width="414" height="757"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="52v-TQ-7UF" firstAttribute="top" secondItem="u6t-B7-vjw" secondAttribute="bottom" constant="10" id="0q5-Mu-RJy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="52v-TQ-7UF" secondAttribute="trailing" id="I3z-94-M42"/>
-                            <constraint firstItem="52v-TQ-7UF" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="dPV-TE-87m"/>
+                            <constraint firstItem="u6t-B7-vjw" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Rro-4k-lFN"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="u6t-B7-vjw" secondAttribute="trailing" id="evd-JU-zqP"/>
+                            <constraint firstItem="u6t-B7-vjw" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="iUB-pg-Ozf"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="52v-TQ-7UF" secondAttribute="bottom" id="ivT-d0-EpO"/>
                             <constraint firstItem="52v-TQ-7UF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="zgX-yO-gKV"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchBar" destination="u6t-B7-vjw" id="QTd-14-mVg"/>
                         <outlet property="tableView" destination="52v-TQ-7UF" id="eqr-GT-ziZ"/>
                     </connections>
                 </viewController>

@@ -11,6 +11,7 @@ final class EventsListViewController: UIViewController, EventsListView {
     var presenter: EventsListPresenterProtocol!
 
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var searchBar: UISearchBar!
     
     static var storyboardName: String {
         "EventsList"
@@ -75,5 +76,15 @@ extension EventsListViewController: UITableViewDataSource, UITableViewDelegate {
         if tableView.contentOffset.y >= (tableView.contentSize.height - tableView.frame.size.height) {
             presenter.didScrollBeyondCurrentPage()
         }
+    }
+}
+
+extension EventsListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter.didChangeSearchText(searchText)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
     }
 }
