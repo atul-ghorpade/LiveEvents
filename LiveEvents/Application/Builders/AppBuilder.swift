@@ -1,8 +1,9 @@
 //
-//  AppRouter.swift
-//  LiveEvents
-//
-//  Created by Atul Ghorpade on 20/01/22.
-//
 
 import Foundation
+
+final class AppBuilder {
+    func buildEventsList() -> EventsListBuilder  {
+        return EventsListBuilder()
+    }
+}

@@ -6,7 +6,7 @@ enum EventsService {
 
 extension EventsService: TargetType {
     var baseURL: URL {
-        return URL(string: "https://api.seatgeek.com/2/" + servicePath)!
+        return URL(string: "https://api.seatgeek.com/2/")!
     }
 
     var servicePath: String {
@@ -16,15 +16,20 @@ extension EventsService: TargetType {
     var path: String {
         switch self {
         case .eventsList:
-            return "/dummy-response.json"
+            return "events"
         }
     }
     
-    var params: [String: Any]? {
+    var task: Task {
         switch self {
         case .eventsList(let query):
-            return ["q": query ?? "",
-                    "client_id" : "clientID"]
+            var requestParamters: [String: String] = [:]
+            requestParamters["client_id"] = ""
+            if let query = query {
+                requestParamters["q"] = query
+            }
+            return .requestParameters(parameters: requestParamters,
+                                      encoding: URLEncoding.queryString)
         }
     }
 
@@ -35,10 +40,6 @@ extension EventsService: TargetType {
         }
     }
 
-    var task: Task {
-        return .requestPlain
-    }
-    
     var encoding: ParameterEncoding {
         return URLEncoding.default
     }

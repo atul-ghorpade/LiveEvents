@@ -36,6 +36,10 @@
 		B7890B542799A27700EF3BD6 /* EventEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7890B532799A27700EF3BD6 /* EventEntity.swift */; };
 		B7890B572799A2DA00EF3BD6 /* EventsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7890B562799A2DA00EF3BD6 /* EventsProvider.swift */; };
 		B7890B5B2799B6F900EF3BD6 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = B7890B5A2799B6F900EF3BD6 /* Moya */; };
+		B7890B5D279AE07500EF3BD6 /* EventDetailsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7890B5C279AE07500EF3BD6 /* EventDetailsBuilder.swift */; };
+		B7890B60279AE76F00EF3BD6 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7890B5F279AE76F00EF3BD6 /* EventDetailsViewController.swift */; };
+		B7890B62279AE77F00EF3BD6 /* EventDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7890B61279AE77F00EF3BD6 /* EventDetailsPresenter.swift */; };
+		B7890B64279AE78F00EF3BD6 /* EventDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7890B63279AE78F00EF3BD6 /* EventDetails.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +92,10 @@
 		B7890B502799A12600EF3BD6 /* MoyaHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaHelper.swift; sourceTree = "<group>"; };
 		B7890B532799A27700EF3BD6 /* EventEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEntity.swift; sourceTree = "<group>"; };
 		B7890B562799A2DA00EF3BD6 /* EventsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsProvider.swift; sourceTree = "<group>"; };
+		B7890B5C279AE07500EF3BD6 /* EventDetailsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsBuilder.swift; sourceTree = "<group>"; };
+		B7890B5F279AE76F00EF3BD6 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
+		B7890B61279AE77F00EF3BD6 /* EventDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsPresenter.swift; sourceTree = "<group>"; };
+		B7890B63279AE78F00EF3BD6 /* EventDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EventDetails.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,8 +191,9 @@
 		B7890B2427999E9F00EF3BD6 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				B7890B3627999FAD00EF3BD6 /* EventsList */,
 				B7890B3127999F6C00EF3BD6 /* Utils */,
+				B7890B3627999FAD00EF3BD6 /* EventsList */,
+				B7890B5E279AE74F00EF3BD6 /* EventDetails */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -223,6 +232,7 @@
 			children = (
 				B7890B2D27999F2300EF3BD6 /* AppBuilder.swift */,
 				B7890B2F27999F4900EF3BD6 /* EventsListBuilder.swift */,
+				B7890B5C279AE07500EF3BD6 /* EventDetailsBuilder.swift */,
 			);
 			path = Builders;
 			sourceTree = "<group>";
@@ -304,6 +314,16 @@
 				B7890B562799A2DA00EF3BD6 /* EventsProvider.swift */,
 			);
 			path = Providers;
+			sourceTree = "<group>";
+		};
+		B7890B5E279AE74F00EF3BD6 /* EventDetails */ = {
+			isa = PBXGroup;
+			children = (
+				B7890B5F279AE76F00EF3BD6 /* EventDetailsViewController.swift */,
+				B7890B61279AE77F00EF3BD6 /* EventDetailsPresenter.swift */,
+				B7890B63279AE78F00EF3BD6 /* EventDetails.storyboard */,
+			);
+			path = EventDetails;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,6 +436,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7890B64279AE78F00EF3BD6 /* EventDetails.storyboard in Resources */,
 				B7890B3B27999FF000EF3BD6 /* EventTableViewCell.xib in Resources */,
 				B7890B0027999E5400EF3BD6 /* LaunchScreen.storyboard in Resources */,
 				B7890AFD27999E5400EF3BD6 /* Assets.xcassets in Resources */,
@@ -448,6 +469,7 @@
 				B7890B442799A06000EF3BD6 /* GetEventsUseCase.swift in Sources */,
 				B7890B3527999F9E00EF3BD6 /* TableViewDataSource.swift in Sources */,
 				B7890B462799A07500EF3BD6 /* UseCaseError.swift in Sources */,
+				B7890B5D279AE07500EF3BD6 /* EventDetailsBuilder.swift in Sources */,
 				B7890B572799A2DA00EF3BD6 /* EventsProvider.swift in Sources */,
 				B7890B2B27999EFE00EF3BD6 /* EventsRouter.swift in Sources */,
 				B7890B2927999EF000EF3BD6 /* AppRouter.swift in Sources */,
@@ -463,7 +485,9 @@
 				B7890B512799A12600EF3BD6 /* MoyaHelper.swift in Sources */,
 				B7890B3327999F8600EF3BD6 /* BasePresentationProtocols.swift in Sources */,
 				B7890B3927999FDC00EF3BD6 /* EventTableViewCell.swift in Sources */,
+				B7890B62279AE77F00EF3BD6 /* EventDetailsPresenter.swift in Sources */,
 				B7890B492799A08E00EF3BD6 /* EventModel.swift in Sources */,
+				B7890B60279AE76F00EF3BD6 /* EventDetailsViewController.swift in Sources */,
 				B7890AF627999E4F00EF3BD6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

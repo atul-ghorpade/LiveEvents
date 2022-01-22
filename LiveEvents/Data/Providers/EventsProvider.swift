@@ -1,4 +1,5 @@
 import Foundation
+import Moya
 
 final class EventsProvider: EventsProviderProtocol {
     private let provider: Provider<EventsService>
@@ -8,7 +9,9 @@ final class EventsProvider: EventsProviderProtocol {
     }
 
     init(provider: Provider<EventsService>) {
-        self.provider = provider
+        let loggerConfig = NetworkLoggerPlugin.Configuration(logOptions: .verbose)
+        let networkLogger = NetworkLoggerPlugin(configuration: loggerConfig)
+        self.provider = MoyaProvider<EventsService>(plugins: [networkLogger])
     }
 
     func getEventsList(query: String?, completion: @escaping EventsListCompletion) {
