@@ -1,4 +1,4 @@
-# LiveEventsApp
+# LiveEvents
 MVP-Clean sample iOS Swift project
 
 The purpose of this document is to explain the architecture of application.
@@ -9,6 +9,9 @@ This app also supports pagination for events list.
 
 Below are running app screenshots:
 
+![list](https://user-images.githubusercontent.com/4067755/150670168-dd7c1bc0-967b-41ef-9bc7-443b24c9fc09.png)  ![details](https://user-images.githubusercontent.com/4067755/150670174-3acb297b-579c-4036-86fc-a3c08407d1bb.png)
+
+![loading](https://user-images.githubusercontent.com/4067755/150670183-63ae43fa-20b9-4367-927c-899181d3c08f.png)  ![error](https://user-images.githubusercontent.com/4067755/150670192-17b23322-0102-4970-9dc7-333a6e28b720.png)
 
 
 ## Table of Contents
@@ -25,7 +28,8 @@ This app divided into below folder structure:
 <img width="260" alt="Screenshot 2022-01-23 at 1 35 54 PM" src="https://user-images.githubusercontent.com/4067755/150669961-c479be9f-baf0-4ed6-9fd5-d019109f194e.png">
 
 
-This diagram will illustrate high level implementation of architecture(3 + 1 architecture)
+This diagram illustrates high level implementation of architecture(3 + 1 architecture)
+
 <img width="404" alt="architecture" src="https://user-images.githubusercontent.com/4067755/147442126-a0e16c53-571e-42ce-b441-fba50cfaf7b7.png">
 
 ### Presentation:
@@ -81,11 +85,10 @@ To develop this, MVP-CLEAN architecture is used.
 To run this project on a local machine follow below steps:
 
 * Open LiveEvents.xcodeproj file in Xcode 13.x version, 
-* Wait till swift package manager loads all the required dependancies and run it on the simulator.
+* Wait till swift package manager loads all the required dependancies and the run app on the simulator.
 
 ## 5. Pending Improvements (// TODOs)
 * Add favourite events implementation.
-* Add unit test cases for data layer.
-* Improve overall test code coverage.
+* Add unit test cases for data layer, improve overall test code coverage.
 * Create dynamic frameworks for each layer.
 * Create Xcode templates to repeat this code structure easily.
