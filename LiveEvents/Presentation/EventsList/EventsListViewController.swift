@@ -7,11 +7,12 @@ protocol EventsListView: ViewProtocol {
     func changeViewState(viewState: EventsListViewState)
 }
 
-final class EventsListViewController: UIViewController, EventsListView {
+final class EventsListViewController: UIViewController, EventsListView, Alertable {
     var presenter: EventsListPresenterProtocol!
 
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
     static var storyboardName: String {
         "EventsList"
@@ -43,10 +44,20 @@ final class EventsListViewController: UIViewController, EventsListView {
         case .clear:
             break
         case .loading:
+            activityIndicatorView.isHidden = false
             tableView.isUserInteractionEnabled = false
+            searchBar.isUserInteractionEnabled = false
         case .render:
+            activityIndicatorView.isHidden = true
             tableView.isUserInteractionEnabled = true
+            searchBar.isUserInteractionEnabled = true
             tableView.reloadData()
+        case .error(let message):
+            activityIndicatorView.isHidden = true
+            searchBar.isUserInteractionEnabled = true
+            showAlert(title: "Error", actionTitle: "Retry", message: message) { [weak self] _ in
+                self?.presenter.didTapRetryOption()
+            }
         }
     }
 }
@@ -76,6 +87,9 @@ extension EventsListViewController: UITableViewDataSource, UITableViewDelegate {
         if tableView.contentOffset.y >= (tableView.contentSize.height - tableView.frame.size.height) {
             presenter.didScrollBeyondCurrentPage()
         }
+        print(tableView.contentOffset.y)
+        print(tableView.contentSize.height)
+        print(tableView.frame.size.height)
     }
 }
 

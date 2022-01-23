@@ -6,12 +6,14 @@ protocol EventsListPresenterProtocol: PresenterProtocol, TableViewDataSource {
     func didScrollBeyondCurrentPage()
     func didSelectRow(indexPath: IndexPath)
     func didChangeSearchText(_ text: String)
+    func didTapRetryOption()
 }
 
 enum EventsListViewState: Equatable {
     case clear
     case loading
     case render(viewModel: ViewModel)
+    case error(message: String)
 
     struct ViewModel: Equatable {
         let rowsViewModels: [EventCellViewModel]
@@ -28,7 +30,7 @@ final class EventsListPresenter: NSObject, EventsListPresenterProtocol {
     private var currentEnteredText: String?
 
     private weak var router: EventsListRouterProtocol!
-    private var eventModels: [EventModel]?
+    private var eventsInfoModel: EventsInfoModel?
     private var getEventsUseCase: GetEventsUseCaseProtocol
 
     private var viewState: EventsListViewState = .clear {
@@ -49,36 +51,43 @@ final class EventsListPresenter: NSObject, EventsListPresenterProtocol {
     }
 
     func viewLoaded() {
+        viewState = .loading
         getEvents()
     }
 
-    private func getEvents(searchText: String? = nil) {
-        viewState = .loading
-        let params = GetEventsParams(query: searchText) { [weak self] result in
+    private func getEvents(searchText: String? = nil,
+                           page: Int = 1) {
+        let params = GetEventsParams(query: searchText, page: page) { [weak self] result in
             guard let self = self else {
                 return
             }
             switch result {
-            case .success(let receivedEvents):
-                self.eventModels = receivedEvents
-                let rowViewModels = (self.eventModels ?? []).map {
+            case .success(let receivedEventsInfoModel):
+                self.eventsInfoModel = receivedEventsInfoModel
+                let rowViewModels = (self.eventsInfoModel?.events ?? []).map {
                     self.getCellViewModel(eventModel: $0)
                 }
                 let viewModel = EventsListViewState.ViewModel(rowsViewModels: rowViewModels)
                 self.viewState = .render(viewModel: viewModel)
-            case .failure(let useCaseError): break
+            case .failure(let useCaseError):
+                var errorMessage: String
+                switch useCaseError {
+                case .mapping:
+                    errorMessage = "Error fetching the events"
+                default:
+                    errorMessage = "Unable to get restaurants list, please retry."
+                }
+                self.viewState = .error(message: errorMessage)
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.getEventsUseCase.run(params)
-        }
+        self.getEventsUseCase.run(params)
     }
 
     func didSelectRow(indexPath: IndexPath) {
-        guard let eventModels = eventModels else {
+        guard let eventsInfoModel = eventsInfoModel else {
             return
         }
-        let selectedEventModel = eventModels[indexPath.row]
+        let selectedEventModel = eventsInfoModel.events[indexPath.row]
         router.showEventDetails(model: selectedEventModel)
     }
 
@@ -87,9 +96,21 @@ final class EventsListPresenter: NSObject, EventsListPresenterProtocol {
             return
         }
         viewState = .loading
+        let nextPage = (eventsInfoModel?.page ?? 0) + 1
+        getEvents(searchText: currentEnteredText, page: nextPage)
+    }
+
+    func didTapRetryOption() {
+        eventsInfoModel = nil
+        viewState = .loading
+        getEvents()
     }
 
     func didChangeSearchText(_ text: String) {
+        if eventsInfoModel?.page ?? 1 > 1 { // beyond first page, text changed -> reset
+            eventsInfoModel = nil
+            viewState = .render(viewModel: EventsListViewState.ViewModel(rowsViewModels: []))
+        }
         currentEnteredText = text
         NSObject.cancelPreviousPerformRequests(withTarget: self,
                                                selector: #selector(EventsListPresenter.searchChangedText),
@@ -98,7 +119,7 @@ final class EventsListPresenter: NSObject, EventsListPresenterProtocol {
                      with: nil,
                      afterDelay: 0.5)
     }
-    
+
     @objc private func searchChangedText() {
         getEvents(searchText: currentEnteredText)
     }
@@ -111,7 +132,11 @@ final class EventsListPresenter: NSObject, EventsListPresenterProtocol {
     }
 
     private func isAllModelsDisplayed() -> Bool {
-        return true
+        let isAllModelsDisplayed = eventsInfoModel?.totalEntitiesAvailable == eventsInfoModel?.events.count
+        if isAllModelsDisplayed {
+            print("All available events are displayed")
+        }
+        return isAllModelsDisplayed
     }
     
     private func getDisplayDateString(date: Date?) -> String? {
@@ -127,11 +152,11 @@ final class EventsListPresenter: NSObject, EventsListPresenterProtocol {
 
 extension EventsListPresenter: TableViewDataSource {
     func numberOfRowsInSection(section: Int) -> Int {
-        eventModels?.count ?? 0
+        eventsInfoModel?.events.count ?? 0
     }
 
     func viewModelForCell(at indexPath: IndexPath) -> CellViewModel? {
-        guard let eventModel = eventModels?[indexPath.row] else {
+        guard let eventModel = eventsInfoModel?.events[indexPath.row] else {
             return nil
         }
         let cellViewModel = getCellViewModel(eventModel: eventModel)

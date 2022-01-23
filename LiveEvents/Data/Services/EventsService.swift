@@ -1,7 +1,7 @@
 import Foundation
 
 enum EventsService {
-    case eventsList(query: String?)
+    case eventsList(query: String?, page: Int)
 }
 
 extension EventsService: TargetType {
@@ -22,9 +22,10 @@ extension EventsService: TargetType {
     
     var task: Task {
         switch self {
-        case .eventsList(let query):
-            var requestParamters: [String: String] = [:]
-            requestParamters["client_id"] = "MjM5NzYxMjV8MTYzNDU0MjY4NC4xNzk3Mzgz"
+        case .eventsList(let query, let page):
+            var requestParamters: [String: Any] = [:]
+            requestParamters["client_id"] = "" // "MjM5NzYxMjV8MTYzNDU0MjY4NC4xNzk3Mzgz"
+            requestParamters["page"] = page
             if let query = query, query != "" {
                 requestParamters["q"] = query
             }

@@ -14,17 +14,18 @@ final class EventsProvider: EventsProviderProtocol {
         self.provider = MoyaProvider<EventsService>(plugins: [networkLogger])
     }
 
-    func getEventsList(query: String?, completion: @escaping EventsListCompletion) {
-        let eventListService = EventsService.eventsList(query: query)
+    func getEventsList(query: String?,
+                       page: Int,
+                       completion: @escaping EventsListCompletion) {
+        let eventListService = EventsService.eventsList(query: query,
+                                                        page: page)
         provider.request(eventListService) { result in
             switch result {
             case let .success(response):
                 do {
-                    let eventsListEntities = try response.map([EventEntity].self, atKeyPath: "events")
-                    let eventsListModels = try eventsListEntities.map {
-                        try $0.toDomain()
-                    }
-                    completion(.success(eventsListModels))
+                    let eventsInfoEntity = try response.map(EventsInfoEntity.self)
+                    let eventsInfoModel = try eventsInfoEntity.toDomain()
+                    completion(.success(eventsInfoModel))
                 } catch {
                     print(error)
                     completion(.failure(.mapping(error)))
