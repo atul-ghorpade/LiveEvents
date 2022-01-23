@@ -120,6 +120,7 @@ final class EventsListPresenter: NSObject, EventsListPresenterProtocol {
     }
 
     @objc private func searchChangedText() {
+        eventsInfoModel = nil
         getEvents(searchText: currentEnteredText)
     }
     
