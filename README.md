@@ -22,7 +22,7 @@ Below are running app screenshots:
 The project is divided into different folder which act as logical units. Each unit has its own responsibility and behaviour. All components communication is done using abstraction with protocols. 
 This app divided into below folder structure:
 
-<img width="230" alt="folders" src="https://user-images.githubusercontent.com/4067755/147441925-7cf04a6f-160a-4a94-9bbd-ce46a4b21d3a.png">
+<img width="268" alt="Screenshot 2022-01-23 at 1 35 54 PM" src="https://user-images.githubusercontent.com/4067755/150669918-88ff8a39-738d-4ffc-8f48-1421eb62aa84.png">
 
 
 This diagram will illustrate high level implementation of architecture(3 + 1 architecture)
