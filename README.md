@@ -86,6 +86,7 @@ To run this project on a local machine follow below steps:
 
 * Open LiveEvents.xcodeproj file in Xcode 13.x version, 
 * Wait till swift package manager loads all the required dependancies and the run app on the simulator.
+* If you get error after above step, please goto File -> Packages -> Update to Latest Package Version and retry above step 
 
 ## 5. Pending Improvements (// TODOs)
 * Add favourite events implementation.
