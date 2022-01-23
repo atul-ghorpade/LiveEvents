@@ -20,10 +20,6 @@ enum EventsListViewState: Equatable {
     }
 }
 
-protocol EventsListPresenterDelegate: AnyObject {
-    func handleNextPageRequest()
-}
-
 final class EventsListPresenter: NSObject, EventsListPresenterProtocol {
 
     private weak var view: EventsListView?
@@ -63,7 +59,10 @@ final class EventsListPresenter: NSObject, EventsListPresenterProtocol {
             }
             switch result {
             case .success(let receivedEventsInfoModel):
-                self.eventsInfoModel = receivedEventsInfoModel
+                let totalReceivedEventModels = (self.eventsInfoModel?.events ?? []) + receivedEventsInfoModel.events
+                self.eventsInfoModel = EventsInfoModel(events: totalReceivedEventModels,
+                                                       totalEntitiesAvailable: receivedEventsInfoModel.totalEntitiesAvailable,
+                                                       page: receivedEventsInfoModel.page)
                 let rowViewModels = (self.eventsInfoModel?.events ?? []).map {
                     self.getCellViewModel(eventModel: $0)
                 }
@@ -75,7 +74,7 @@ final class EventsListPresenter: NSObject, EventsListPresenterProtocol {
                 case .mapping:
                     errorMessage = "Error fetching the events"
                 default:
-                    errorMessage = "Unable to get restaurants list, please retry."
+                    errorMessage = "Unable to get events list, please retry."
                 }
                 self.viewState = .error(message: errorMessage)
             }

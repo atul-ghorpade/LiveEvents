@@ -24,7 +24,7 @@ extension EventsService: TargetType {
         switch self {
         case .eventsList(let query, let page):
             var requestParamters: [String: Any] = [:]
-            requestParamters["client_id"] = "" // "MjM5NzYxMjV8MTYzNDU0MjY4NC4xNzk3Mzgz"
+            requestParamters["client_id"] = "MjM5NzYxMjV8MTYzNDU0MjY4NC4xNzk3Mzgz"
             requestParamters["page"] = page
             if let query = query, query != "" {
                 requestParamters["q"] = query

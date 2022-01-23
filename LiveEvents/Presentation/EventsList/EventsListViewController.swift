@@ -87,9 +87,6 @@ extension EventsListViewController: UITableViewDataSource, UITableViewDelegate {
         if tableView.contentOffset.y >= (tableView.contentSize.height - tableView.frame.size.height) {
             presenter.didScrollBeyondCurrentPage()
         }
-        print(tableView.contentOffset.y)
-        print(tableView.contentSize.height)
-        print(tableView.frame.size.height)
     }
 }
 

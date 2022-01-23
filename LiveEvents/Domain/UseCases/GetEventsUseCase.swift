@@ -1,4 +1,3 @@
-import SwiftUI
 struct GetEventsParams {
     typealias Completion = (Result<EventsInfoModel, UseCaseError>) -> Void
 
